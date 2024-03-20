@@ -1,28 +1,19 @@
-# import requests
-#
-# url = 'https://api-ssl.bitly.com/v4/user'
-# headers = {
-#     'Authorization': 'Bearer d8f3784dc29d4dbab3752c20b2076bf878e9e524',
-# }
-#
-# response = requests.get(url, headers=headers)
-#
-# print(response.json())
-
 
 import requests
 
-headers = {
-    'Authorization': 'Bearer d8f3784dc29d4dbab3752c20b2076bf878e9e524',
-    'Content-Type': 'application/json',
-}
+def shorten_link(token, url):
+    headers = {
+        'Authorization': f'Bearer {token}',
+        'Content-Type': 'application/json',
+    }
+    data = {"long_url": url}
+    response = requests.post('https://api-ssl.bitly.com/v4/shorten', headers=headers, json=data)
+    print(response.text)
 
-data = { "long_url": "https://ya.ru/" }
 
-response = requests.post('https://api-ssl.bitly.com/v4/shorten', headers=headers, json=data)
-
-print(response.json())
-
+token = 'd8f3784dc29d4dbab3752c20b2076bf878e9e524'
+url = 'https://ya.ru/'
+shorten_link(token, url)
 
 
 
