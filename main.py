@@ -17,9 +17,9 @@ headers = {
     'Content-Type': 'application/json',
 }
 
-data = '{ "long_url": "https://ya.ru/" }'
+data = { "long_url": "https://ya.ru/" }
 
-response = requests.post('https://api-ssl.bitly.com/v4/shorten', headers=headers, data=data)
+response = requests.post('https://api-ssl.bitly.com/v4/shorten', headers=headers, json=data)
 
 print(response.json())
 
