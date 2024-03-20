@@ -8,12 +8,13 @@ def shorten_link(token, url):
     }
     data = {"long_url": url}
     response = requests.post('https://api-ssl.bitly.com/v4/shorten', headers=headers, json=data)
-    print(response.text)
+    return response.json()['link']
+
 
 
 token = 'd8f3784dc29d4dbab3752c20b2076bf878e9e524'
 url = 'https://ya.ru/'
-shorten_link(token, url)
+print('Битлинк', shorten_link(token, url))
 
 
 
