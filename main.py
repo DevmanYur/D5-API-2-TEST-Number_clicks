@@ -1,5 +1,34 @@
 
 import requests
+from urllib.parse import urlparse
+
+def info_bitlink(token, bitlink):
+
+    headers = {
+        'Authorization': f'Bearer {token}',
+    }
+
+    response = requests.get(f'https://api-ssl.bitly.com/v4/bitlinks/{bitlink}', headers=headers)
+
+    if bitlink == response.json()['id']:
+        print(1)
+    else:
+        print(0)
+
+
+    return print(response.json()['id'])
+
+
+
+def is_bitlink(url):
+
+    url = f'https://{url}'
+    parsed = urlparse(url)
+    print('netloc  :', parsed.netloc)
+    print('path    :', parsed.path)
+    print('hostname:', parsed.hostname)
+
+
 
 def count_clicks(token, bitlink):
     headers = {
@@ -38,13 +67,16 @@ user_input = input("Введите ссылку для сокращения: ")
 try:
   bitlink = shorten_link(token, user_input)
   print('Битлинк', bitlink)
-  count_clicks(token, 'bit.ly/3TplK9o')
+  is_bitlink(bitlink)
+  info_bitlink(token, 'https://ya.ru/')
+  # count_clicks(token, 'bit.ly/3TplK9o')
 
 except Exception as e:
   print('Ошибка при загрузке страницы: ' + str(e))
 
 # url = 'https://ya.ru/'
 # url = 'https://ya888.ru/'
+# Битлинк bit.ly/3TplK9o
 
 
 
